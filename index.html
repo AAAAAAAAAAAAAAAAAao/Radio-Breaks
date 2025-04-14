@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Breaks</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="Radio_Breaks.ico">
+</head>
+<body>
+    <header>
+        <h1>Radio Breaks</h1>
+        <section class="player">
+            <audio id="radioPlayer" preload="none"></audio>
+
+            <div class="custom-player">
+                <span id="trackTitle">Now playing: ...</span>
+                <button id="muteBtn">Unmute</button>
+            </div>
+        </section>
+		
+    </header>
+
+    <header class="menu">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="news">
+        <h2>Latest News</h2>
+        <div class="news-container">
+            <div class="news-item">
+			<h3>RADIO BREAKS IS "LIVE"!</h3>
+			<p>Today is the day when RADIO BREAKS begins its existence as an audio-broadcasting project. I have to say, this isn’t a traditional radio station — it’s just a playlist with no skip button :3</p>
+			<p>08.04.2025</p>
+			</div>
+            <div class="news-item"><h3>Coming soon...</h3></div>
+            <div class="news-item"><h3>Coming soon...</h3></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About station</h2>
+        <p>Radio Breaks is something more than just my institute project.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Radio Breaks</p>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('radioPlayer');
+        const muteBtn = document.getElementById('muteBtn');
+        const trackTitle = document.getElementById('trackTitle');
+
+        const tracks = [
+            { title: 'Sewerslvt - ultradespair', src: 'music/Sewerslvt - ultradespair.mp3' },
+            { title: 'Sewerslvt - Pretty Cvnt', src: 'music/Sewerslvt - Pretty Cvnt.mp3' },
+			{ title: 'Sewerslvt - sick, twisted, demented', src: 'music/Sewerslvt - sick, twisted, demented.mp3'},
+			{ title: 'Sewerslvt - Newlove', src: 'music/Sewerslvt - Newlove.mp3'},
+			{ title: 'Sewerslvt - inpeace', src: 'music/Sewerslvt - inpeace.mp3'},
+			{ title: 'Sewerslvt - inpeace', src: 'music/Sewerslvt - inpeace.mp3'},
+			{ title: 'Sewerslvt - I Break My Heart & Yours', src: 'music/Sewerslvt - I Break My Heart & Yours.mp3'},
+			{ title: 'Sewerslvt - goodbye', src: 'music/Sewerslvt - goodbye.mp3'},
+			{ title: 'Sewerslvt - Blooming Iridescent Flower', src: 'music/Sewerslvt - Blooming Iridescent Flower.mp3'},
+			{ title: 'LOONA - Hi High (Sewerslvt Remix)', src: 'music/LOONA - Hi High (Sewerslvt Remix).mp3'},
+			{ title: 'Bring Me The Horizon - Drown (Sewerslvt Remix)', src: 'music/Bring Me The Horizon - Drown (Sewerslvt Remix).mp3'},
+			{ title: 'AZALEA - 卒業ですね (Sewerslvt Remix)', src: 'music/AZALEA - 卒業ですね (Sewerslvt Remix).mp3'},
+            // Додати інші треки за потреби
+        ];
+
+        let isMuted = true;
+		let isFirstPlay = true;
+
+        function playRandomTrack() {
+            const randomIndex = Math.floor(Math.random() * tracks.length);
+            const selectedTrack = tracks[randomIndex];
+
+            audio.src = selectedTrack.src;
+            trackTitle.textContent = `Now playing: ${selectedTrack.title}`;
+            audio.play();
+        }
+
+        // Початково мутація
+        audio.muted = isMuted;
+
+        // Дія при натисканні на "unmute"
+        muteBtn.addEventListener('click', () => {
+            isMuted = !isMuted;
+            audio.muted = isMuted;
+            muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+
+            if (isFirstPlay) {
+                playRandomTrack();
+                isFirstPlay = false;
+            }
+        });
+
+        // Перемикання на новий трек після завершення поточного
+        audio.addEventListener('ended', () => {
+            if (!isMuted) {
+                playRandomTrack();
+            }
+        });
+    </script>
+</body>
+</html>
