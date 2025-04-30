@@ -56,59 +56,60 @@
     </footer>
 
     <script>
-        const audio = document.getElementById('radioPlayer');
-        const muteBtn = document.getElementById('muteBtn');
-        const trackTitle = document.getElementById('trackTitle');
+    const audio = document.getElementById('radioPlayer');
+    const muteBtn = document.getElementById('muteBtn');
+    const trackTitle = document.getElementById('trackTitle');
 
-        const tracks = [
-            { title: 'Sewerslvt - ultradespair', src: 'music/Sewerslvt - ultradespair.mp3' },
-            { title: 'Sewerslvt - Pretty Cvnt', src: 'music/Sewerslvt - Pretty Cvnt.mp3' },
-			{ title: 'Sewerslvt - sick, twisted, demented', src: 'music/Sewerslvt - sick, twisted, demented.mp3'},
-			{ title: 'Sewerslvt - Newlove', src: 'music/Sewerslvt - Newlove.mp3'},
-			{ title: 'Sewerslvt - inpeace', src: 'music/Sewerslvt - inpeace.mp3'},
-			{ title: 'Sewerslvt - inpeace', src: 'music/Sewerslvt - inpeace.mp3'},
-			{ title: 'Sewerslvt - I Break My Heart & Yours', src: 'music/Sewerslvt - I Break My Heart & Yours.mp3'},
-			{ title: 'Sewerslvt - goodbye', src: 'music/Sewerslvt - goodbye.mp3'},
-			{ title: 'Sewerslvt - Blooming Iridescent Flower', src: 'music/Sewerslvt - Blooming Iridescent Flower.mp3'},
-			{ title: 'LOONA - Hi High (Sewerslvt Remix)', src: 'music/LOONA - Hi High (Sewerslvt Remix).mp3'},
-			{ title: 'Bring Me The Horizon - Drown (Sewerslvt Remix)', src: 'music/Bring Me The Horizon - Drown (Sewerslvt Remix).mp3'},
-			{ title: 'AZALEA - 卒業ですね (Sewerslvt Remix)', src: 'music/AZALEA - 卒業ですね (Sewerslvt Remix).mp3'},
-            // Додати інші треки за потреби
-        ];
+    let tracks = [];
+    let isMuted = true;
+    let isFirstPlay = true;
 
-        let isMuted = true;
-		let isFirstPlay = true;
-
-        function playRandomTrack() {
-            const randomIndex = Math.floor(Math.random() * tracks.length);
-            const selectedTrack = tracks[randomIndex];
-
-            audio.src = selectedTrack.src;
-            trackTitle.textContent = `Now playing: ${selectedTrack.title}`;
-            audio.play();
-        }
-
-        // Початково мутація
-        audio.muted = isMuted;
-
-        // Дія при натисканні на "unmute"
-        muteBtn.addEventListener('click', () => {
-            isMuted = !isMuted;
-            audio.muted = isMuted;
-            muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
-
-            if (isFirstPlay) {
-                playRandomTrack();
-                isFirstPlay = false;
-            }
-        });
-
-        // Перемикання на новий трек після завершення поточного
-        audio.addEventListener('ended', () => {
+    // Завантаження плейлиста з JSON
+    fetch('playlist.json')
+        .then(response => response.json())
+        .then(data => {
+            tracks = data;
+            // Почати програвання одразу, якщо хочеш
             if (!isMuted) {
                 playRandomTrack();
             }
+        })
+        .catch(error => {
+            console.error('Помилка при завантаженні плейлиста:', error);
         });
-    </script>
+
+    function playRandomTrack() {
+        if (tracks.length === 0) return;
+
+        const randomIndex = Math.floor(Math.random() * tracks.length);
+        const selectedTrack = tracks[randomIndex];
+
+        audio.src = selectedTrack.src;
+        trackTitle.textContent = `Now playing: ${selectedTrack.artist} — ${selectedTrack.title}`;
+        audio.play();
+    }
+
+    // Мутація з кнопки
+    audio.muted = isMuted;
+
+    muteBtn.addEventListener('click', () => {
+        isMuted = !isMuted;
+        audio.muted = isMuted;
+        muteBtn.textContent = isMuted ? 'Unmute' : 'Mute';
+
+        if (isFirstPlay && !isMuted && tracks.length > 0) {
+            playRandomTrack();
+            isFirstPlay = false;
+        }
+    });
+
+    // Наступний трек після завершення
+    audio.addEventListener('ended', () => {
+        if (!isMuted) {
+            playRandomTrack();
+        }
+    });
+</script>
+
 </body>
 </html>

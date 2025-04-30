@@ -1,0 +1,23 @@
+{
+  "name": "radio-breaks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate-playlist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AAAAAAAAAAAAAAAAAao/Radio-Breaks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AAAAAAAAAAAAAAAAAao/Radio-Breaks/issues"
+  },
+  "homepage": "https://github.com/AAAAAAAAAAAAAAAAAao/Radio-Breaks#readme",
+  "dependencies": {
+    "music-metadata": "^11.2.1"
+  }
+}
