@@ -1,13 +1,10 @@
 body {
-    background-image: url('../images/background.jpg'); 
-    background-size: cover; /* Масштабує зображення на весь екран */
-    background-position: center; /* Центрує */
-    background-repeat: no-repeat; /* Не повторює */
-    background-attachment: fixed; /* Фіксує фон при прокрутці */
+    background-image: linear-gradient(#391f63, #09060d);
+	background-position: fixed;
     font-family: 'Press Start 2P', sans-serif;
     margin: 0;
     padding: 0;
-    color: #ece7e2; /* Основний колір тексту */
+    color: #c85df9; /* Основний колір тексту */
 }
 
 header { 
@@ -15,7 +12,7 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 0px 0px 0px 20px; 
-    background-color: #391f63; 
+    background-color: #502a8c; 
     border-bottom: 2px solid #9c918f;
     font-family: 'Press Start 2P';
 	
@@ -58,14 +55,15 @@ header {
 nav a { 
 	padding: 5px;
     margin: 5 10px; 
-    color: #ece7e2; 
+    color: #c85df9; 
     text-decoration: none; 
 	outline: 2px solid #c85df9;
-	background-color: #823ce6;
+	background-color: #391f63;
 	border-radius: 5px;
 }
 
 nav a:hover{
+	color: #391f63; 
     background-color: #c85df9;
 	outline: 2px solid #823ce6;
 
@@ -80,7 +78,7 @@ nav a:hover{
 h1 {
     font-family: 'VT323', monospace;
     font-size: 3rem;
-    color: #823ce6;
+    color: #c85df9;
     text-transform: uppercase;
     animation: glitch 0.5s infinite alternate;
 	
@@ -101,34 +99,31 @@ header h1 {
 }
 
 #about h2 {
-    color: #c85df9;
+    color: #823ce6;
     font-size: 2rem;
     font-family: 'Press Start 2P';
-    text-shadow: 2px 2px 4px #ffffff, -2px -2px 4px #ffffff, 
-                 2px -2px 4px #ffffff, -2px 2px 4px #ffffff; /* Білий контур */
+    
 }
 
 #about p {
-    color: #c85df9;
+    color: #823ce6;
     font-family: 'Press Start 2P';
     font-size: 1.2rem;
-    text-shadow: 2px 2px 4px #ffffff, -2px -2px 4px #ffffff, 
-                 2px -2px 4px #ffffff, -2px 2px 4px #ffffff; /* Білий контур */
+    
 }
 
 footer {
     text-align: center;
-    color: #c85df9;
-    text-shadow: 2px 2px 4px #ffffff, -2px -2px 4px #ffffff, 
-                 2px -2px 4px #ffffff, -2px 2px 4px #ffffff; /* Білий контур */
+    color: #823ce6;
+    
 }
 
 @keyframes glitch {
-    0% { text-shadow: 2px 2px purple, -2px -2px purple; }
-    25% { text-shadow: -2px -2px purple, 2px 2px purple; }
-    50% { text-shadow: 2px -2px purple, -2px 2px purple; }
-    75% { text-shadow: -2px 2px purple, 2px -2px purple; }
-    100% { text-shadow: 2px 2px purple, -2px -2px purple; }
+    0% { text-shadow: 2px 2px #736766, -2px -2px #736766; }
+    25% { text-shadow: -2px -2px #736766, 2px 2px #736766; }
+    50% { text-shadow: 2px -2px #736766, -2px 2px #736766; }
+    75% { text-shadow: -2px 2px #736766, 2px -2px #736766; }
+    100% { text-shadow: 2px 2px #736766, -2px -2px #736766; }
 }
 .menu {
 	position: sticky;
